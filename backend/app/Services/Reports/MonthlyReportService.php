@@ -42,7 +42,7 @@ class MonthlyReportService extends BaseReportService
                     'name' => $catName,
                     'count' => $group->count(),
                     'percentage' => $pct,
-                    'amount_formatted' => '₹' . number_format($sum, 2),
+                    'amount_formatted' => 'Rs. ' . number_format($sum, 2),
                 ];
             })->values()->sortByDesc('amount_formatted')->values()->toArray();
 
@@ -57,7 +57,7 @@ class MonthlyReportService extends BaseReportService
                     'description' => $item->description,
                     'category' => $item->category ? $item->category->name : 'Uncategorized',
                     'method_or_source' => ucfirst(str_replace('_', ' ', $item->payment_method)),
-                    'amount_formatted' => '-₹' . number_format($item->amount, 2),
+                    'amount_formatted' => '-Rs. ' . number_format($item->amount, 2),
                 ];
             })->toArray();
 
@@ -66,9 +66,9 @@ class MonthlyReportService extends BaseReportService
             'title' => 'Monthly Financial Statement',
             'period_label' => $start->format('F Y'),
             'summary_cards' => [
-                ['label' => 'Total Income', 'value' => '₹' . number_format($totalIncome, 2)],
-                ['label' => 'Total Expenses', 'value' => '₹' . number_format($totalExpenses, 2)],
-                ['label' => 'Net Balance', 'value' => '₹' . number_format($balance, 2)],
+                ['label' => 'Total Income', 'value' => 'Rs. ' . number_format($totalIncome, 2)],
+                ['label' => 'Total Expenses', 'value' => 'Rs. ' . number_format($totalExpenses, 2)],
+                ['label' => 'Net Balance', 'value' => 'Rs. ' . number_format($balance, 2)],
                 ['label' => 'Savings Rate', 'value' => $savingsRate . '%'],
             ],
             'breakdown' => $categoryBreakdown,

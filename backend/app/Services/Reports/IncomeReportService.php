@@ -50,7 +50,7 @@ class IncomeReportService extends BaseReportService
                 'name' => $typeStr,
                 'count' => $group->count(),
                 'amount' => $sum,
-                'amount_formatted' => '₹' . number_format($sum, 2),
+                'amount_formatted' => 'Rs. ' . number_format($sum, 2),
                 'percentage' => $pct,
             ];
         })->values()->sortByDesc('amount')->values()->toArray();
@@ -63,7 +63,7 @@ class IncomeReportService extends BaseReportService
                 'category' => $item->category ? $item->category->name : 'Income',
                 'method_or_source' => ucfirst(str_replace('_', ' ', $item->type)),
                 'amount' => (float) $item->amount,
-                'amount_formatted' => '+₹' . number_format($item->amount, 2),
+                'amount_formatted' => '+Rs. ' . number_format($item->amount, 2),
                 'notes' => $item->description ?? '',
             ];
         })->toArray();
@@ -73,9 +73,9 @@ class IncomeReportService extends BaseReportService
             'title' => 'Income Report',
             'period_label' => $start->format('d M Y') . ' to ' . $end->format('d M Y'),
             'summary_cards' => [
-                ['label' => 'Total Income', 'value' => '₹' . number_format($totalAmount, 2)],
+                ['label' => 'Total Income', 'value' => 'Rs. ' . number_format($totalAmount, 2)],
                 ['label' => 'Income Entries', 'value' => (string) $count],
-                ['label' => 'Average Deposit', 'value' => '₹' . number_format($avgAmount, 2)],
+                ['label' => 'Average Deposit', 'value' => 'Rs. ' . number_format($avgAmount, 2)],
             ],
             'breakdown' => $typeBreakdown,
             'rows' => $rows,

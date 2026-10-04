@@ -49,7 +49,7 @@ class CategoryReportService extends BaseReportService
                 'category' => $catName,
                 'method_or_source' => "{$count} transactions",
                 'amount' => $sum,
-                'amount_formatted' => '₹' . number_format($sum, 2),
+                'amount_formatted' => 'Rs. ' . number_format($sum, 2),
                 'count' => $count,
                 'percentage' => $pct,
                 'average' => $avg,
@@ -63,7 +63,7 @@ class CategoryReportService extends BaseReportService
             'title' => 'Category Spending Report',
             'period_label' => $start->format('d M Y') . ' to ' . $end->format('d M Y'),
             'summary_cards' => [
-                ['label' => 'Total Category Outflow', 'value' => '₹' . number_format($grandTotal, 2)],
+                ['label' => 'Total Category Outflow', 'value' => 'Rs. ' . number_format($grandTotal, 2)],
                 ['label' => 'Active Categories', 'value' => (string) count($rows)],
                 ['label' => 'Total Transactions', 'value' => (string) $totalTxns],
             ],

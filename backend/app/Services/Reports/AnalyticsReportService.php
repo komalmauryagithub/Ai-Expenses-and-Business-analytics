@@ -45,7 +45,7 @@ class AnalyticsReportService extends BaseReportService
                     'description' => $anom['description'] . ' (Statistical IQR Outlier)',
                     'category' => $anom['category'],
                     'method_or_source' => $anom['payment_method'],
-                    'amount_formatted' => '-₹' . number_format($anom['amount'], 2),
+                    'amount_formatted' => '-Rs. ' . number_format($anom['amount'], 2),
                 ];
             }
         } else {
@@ -54,7 +54,7 @@ class AnalyticsReportService extends BaseReportService
                 'description' => 'Statistical Analysis',
                 'category' => 'Pandas Engine',
                 'method_or_source' => 'IQR Rule ($Q3 + 1.5 \\times \\text{IQR}$)',
-                'amount_formatted' => '₹0.00 Outliers',
+                'amount_formatted' => 'Rs. 0.00 Outliers',
             ];
         }
 
@@ -63,16 +63,16 @@ class AnalyticsReportService extends BaseReportService
             'title' => 'Deterministic Analytics Report',
             'period_label' => $start->format('d M Y') . ' to ' . $end->format('d M Y'),
             'summary_cards' => [
-                ['label' => 'Total Outflow', 'value' => '₹' . number_format($totalExpenses, 2)],
-                ['label' => 'Net Balance', 'value' => '₹' . number_format($balance, 2)],
-                ['label' => 'IQR Upper Threshold', 'value' => '₹' . number_format($iqrThreshold, 2)],
+                ['label' => 'Total Outflow', 'value' => 'Rs. ' . number_format($totalExpenses, 2)],
+                ['label' => 'Net Balance', 'value' => 'Rs. ' . number_format($balance, 2)],
+                ['label' => 'IQR Upper Threshold', 'value' => 'Rs. ' . number_format($iqrThreshold, 2)],
                 ['label' => 'Anomalies Flagged', 'value' => (string) $anomaliesCount],
             ],
             'breakdown' => array_map(fn($pm) => [
                 'name' => $pm['payment_method'],
                 'count' => $pm['count'],
                 'percentage' => $pm['percentage'],
-                'amount_formatted' => '₹' . number_format($pm['amount'], 2),
+                'amount_formatted' => 'Rs. ' . number_format($pm['amount'], 2),
             ], $advFull['expense_analytics']['payment_methods'] ?? []),
             'rows' => $rows,
         ];

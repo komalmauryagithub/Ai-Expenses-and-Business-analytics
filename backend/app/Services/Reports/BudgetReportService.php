@@ -53,11 +53,11 @@ class BudgetReportService extends BaseReportService
                 'category' => $b->category ? $b->category->name : 'All Categories',
                 'method_or_source' => strtoupper(str_replace('_', ' ', $status)),
                 'amount' => $allocated,
-                'amount_formatted' => '₹' . number_format($allocated, 2),
+                'amount_formatted' => 'Rs. ' . number_format($allocated, 2),
                 'spent' => $spent,
-                'spent_formatted' => '₹' . number_format($spent, 2),
+                'spent_formatted' => 'Rs. ' . number_format($spent, 2),
                 'remaining' => $remaining,
-                'remaining_formatted' => '₹' . number_format($remaining, 2),
+                'remaining_formatted' => 'Rs. ' . number_format($remaining, 2),
                 'usage_percentage' => $usagePct,
                 'status' => $status,
             ];
@@ -70,8 +70,8 @@ class BudgetReportService extends BaseReportService
             'title' => 'Budget Performance Report',
             'period_label' => 'Active & Historical Budgets',
             'summary_cards' => [
-                ['label' => 'Total Allocated Budget', 'value' => '₹' . number_format($totalAllocated, 2)],
-                ['label' => 'Total Actual Spent', 'value' => '₹' . number_format($totalSpent, 2)],
+                ['label' => 'Total Allocated Budget', 'value' => 'Rs. ' . number_format($totalAllocated, 2)],
+                ['label' => 'Total Actual Spent', 'value' => 'Rs. ' . number_format($totalSpent, 2)],
                 ['label' => 'Overall Utilization', 'value' => $overallUsage . '%'],
             ],
             'breakdown' => array_map(fn($r) => [

@@ -51,7 +51,7 @@ class ExpenseReportService extends BaseReportService
                 'name' => $catName,
                 'count' => $group->count(),
                 'amount' => $sum,
-                'amount_formatted' => '₹' . number_format($sum, 2),
+                'amount_formatted' => 'Rs. ' . number_format($sum, 2),
                 'percentage' => $pct,
             ];
         })->values()->sortByDesc('amount')->values()->toArray();
@@ -65,7 +65,7 @@ class ExpenseReportService extends BaseReportService
                 'name' => $method,
                 'count' => $group->count(),
                 'amount' => $sum,
-                'amount_formatted' => '₹' . number_format($sum, 2),
+                'amount_formatted' => 'Rs. ' . number_format($sum, 2),
                 'percentage' => $pct,
             ];
         })->values()->sortByDesc('amount')->values()->toArray();
@@ -79,7 +79,7 @@ class ExpenseReportService extends BaseReportService
                 'category' => $item->category ? $item->category->name : 'Uncategorized',
                 'method_or_source' => ucfirst(str_replace('_', ' ', $item->payment_method)),
                 'amount' => (float) $item->amount,
-                'amount_formatted' => '-₹' . number_format($item->amount, 2),
+                'amount_formatted' => '-Rs. ' . number_format($item->amount, 2),
                 'notes' => $item->notes ?? '',
             ];
         })->toArray();
@@ -89,9 +89,9 @@ class ExpenseReportService extends BaseReportService
             'title' => 'Expense Report',
             'period_label' => $start->format('d M Y') . ' to ' . $end->format('d M Y'),
             'summary_cards' => [
-                ['label' => 'Total Expenses', 'value' => '₹' . number_format($totalAmount, 2)],
+                ['label' => 'Total Expenses', 'value' => 'Rs. ' . number_format($totalAmount, 2)],
                 ['label' => 'Transaction Count', 'value' => (string) $count],
-                ['label' => 'Average Expense', 'value' => '₹' . number_format($avgAmount, 2)],
+                ['label' => 'Average Expense', 'value' => 'Rs. ' . number_format($avgAmount, 2)],
             ],
             'breakdown' => $categoryBreakdown,
             'payment_breakdown' => $paymentBreakdown,

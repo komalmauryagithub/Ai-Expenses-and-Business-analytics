@@ -41,7 +41,7 @@ class FinancialSummaryReportService extends BaseReportService
                 'category' => $item->category ? $item->category->name : 'Income',
                 'method_or_source' => ucfirst(str_replace('_', ' ', $item->type)),
                 'amount' => (float) $item->amount,
-                'amount_formatted' => '+₹' . number_format($item->amount, 2),
+                'amount_formatted' => '+Rs. ' . number_format($item->amount, 2),
             ];
         });
 
@@ -53,7 +53,7 @@ class FinancialSummaryReportService extends BaseReportService
                 'category' => $item->category ? $item->category->name : 'Uncategorized',
                 'method_or_source' => ucfirst(str_replace('_', ' ', $item->payment_method)),
                 'amount' => (float) $item->amount,
-                'amount_formatted' => '-₹' . number_format($item->amount, 2),
+                'amount_formatted' => '-Rs. ' . number_format($item->amount, 2),
             ];
         });
 
@@ -64,9 +64,9 @@ class FinancialSummaryReportService extends BaseReportService
             'title' => 'Income vs Expense Financial Summary',
             'period_label' => $start->format('d M Y') . ' to ' . $end->format('d M Y'),
             'summary_cards' => [
-                ['label' => 'Total Income', 'value' => '₹' . number_format($totalIncome, 2)],
-                ['label' => 'Total Expenses', 'value' => '₹' . number_format($totalExpenses, 2)],
-                ['label' => 'Net Balance', 'value' => '₹' . number_format($balance, 2)],
+                ['label' => 'Total Income', 'value' => 'Rs. ' . number_format($totalIncome, 2)],
+                ['label' => 'Total Expenses', 'value' => 'Rs. ' . number_format($totalExpenses, 2)],
+                ['label' => 'Net Balance', 'value' => 'Rs. ' . number_format($balance, 2)],
                 ['label' => 'Savings Rate', 'value' => $savingsRate . '%'],
             ],
             'totals' => [
