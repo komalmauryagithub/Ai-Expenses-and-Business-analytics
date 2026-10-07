@@ -127,7 +127,7 @@ const AIAssistantPage = () => {
         conversation_id: activeConversationId
       };
 
-      const res = await api.post('/ai/chat', payload);
+      const res = await api.post('/ai/chat', payload, { timeout: 60000 });
       if (res.data.success) {
         const data = res.data.data;
         if (!activeConversationId) {

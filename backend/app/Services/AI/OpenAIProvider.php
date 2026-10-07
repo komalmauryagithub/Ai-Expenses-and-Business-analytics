@@ -62,10 +62,16 @@ class OpenAIProvider implements AIProviderInterface
         ];
 
         try {
-            $response = Http::withHeaders([
-                'Authorization' => "Bearer {$this->apiKey}",
-                'Content-Type' => 'application/json',
-            ])->timeout(15)->post($url, $payload);
+            $response = Http::withoutVerifying()
+                ->withOptions([
+                    'force_ip_resolve' => 'v4',
+                ])
+                ->withHeaders([
+                    'Authorization' => "Bearer {$this->apiKey}",
+                    'Content-Type' => 'application/json',
+                ])
+                ->timeout(30)
+                ->post($url, $payload);
 
             if ($response->successful()) {
                 $json = $response->json();

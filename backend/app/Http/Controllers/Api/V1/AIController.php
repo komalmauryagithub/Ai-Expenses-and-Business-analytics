@@ -25,6 +25,7 @@ class AIController extends Controller
      */
     public function chat(Request $request): JsonResponse
     {
+        @set_time_limit(120);
         $maxLength = (int) config('services.ai.max_request_length', 1000);
         $validator = Validator::make($request->all(), [
             'message' => ['required', 'string', 'min:2', "max:{$maxLength}"],

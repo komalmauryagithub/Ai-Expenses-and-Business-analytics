@@ -30,18 +30,18 @@ class GeminiProvider implements AIProviderInterface
 
     public function generateResponse(string $systemPrompt, string $userPrompt, array $conversationHistory = []): string
     {
+        @set_time_limit(120);
+
         if (!$this->isConfigured()) {
             throw new \Exception("Gemini AI API key is not configured in backend environment.");
         }
 
-        $url = "https://generativelanguage.googleapis.com/v1beta/models/{$this->model}:generateContent?key={$this->apiKey}";
-
         // Format system instruction and conversation messages for Gemini API
         $contents = [];
 
-        // Include recent conversation history (max 6 messages) if available
+        // Include recent conversation history (max 4 messages) if available
         if (!empty($conversationHistory)) {
-            $recent = array_slice($conversationHistory, -6);
+            $recent = array_slice($conversationHistory, -4);
             foreach ($recent as $msg) {
                 $role = ($msg['role'] === 'assistant') ? 'model' : 'user';
                 $contents[] = [
@@ -68,29 +68,51 @@ class GeminiProvider implements AIProviderInterface
             ],
         ];
 
-        try {
-            $response = Http::withHeaders([
-                'Content-Type' => 'application/json',
-            ])->timeout(15)->post($url, $payload);
+        $candidateModels = array_unique([
+            $this->model,
+            'gemini-flash-latest',
+            'gemini-flash-lite-latest',
+        ]);
 
-            if ($response->successful()) {
-                $json = $response->json();
-                $text = $json['candidates'][0]['content']['parts'][0]['text'] ?? null;
-                if (!empty($text)) {
-                    return trim($text);
+        $lastException = null;
+
+        foreach ($candidateModels as $currentModel) {
+            $url = "https://generativelanguage.googleapis.com/v1beta/models/{$currentModel}:generateContent?key={$this->apiKey}";
+
+            try {
+                $response = Http::withoutVerifying()
+                    ->withOptions([
+                        'force_ip_resolve' => 'v4',
+                    ])
+                    ->withHeaders([
+                        'Content-Type' => 'application/json',
+                    ])
+                    ->timeout(18)
+                    ->post($url, $payload);
+
+                if ($response->successful()) {
+                    $json = $response->json();
+                    $text = $json['candidates'][0]['content']['parts'][0]['text'] ?? null;
+                    if (!empty($text)) {
+                        return trim($text);
+                    }
                 }
-                Log::warning("Gemini AI API returned empty candidates content: " . json_encode($json));
-                throw new \Exception("Gemini AI service returned an empty response.");
-            }
 
-            Log::error("Gemini AI Provider HTTP Error: {$response->status()} - {$response->body()}");
-            if ($response->status() === 429) {
-                throw new \Exception("Gemini AI quota or rate limit exceeded. Please try again later.");
+                if ($response->status() === 404) {
+                    continue;
+                }
+
+                Log::error("Gemini AI Provider HTTP Error: {$response->status()} - {$response->body()}");
+            } catch (\Throwable $e) {
+                $lastException = $e;
+                Log::warning("Gemini AI attempt for {$currentModel} failed: {$e->getMessage()}");
             }
-            throw new \Exception("Gemini AI provider error (HTTP {$response->status()}).");
-        } catch (\Throwable $e) {
-            Log::error("Gemini AI Exception: {$e->getMessage()}");
-            throw $e;
         }
+
+        if ($lastException) {
+            throw $lastException;
+        }
+
+        throw new \Exception("Gemini AI service is temporarily unavailable. Please try again in a moment.");
     }
 }
