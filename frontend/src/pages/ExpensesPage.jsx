@@ -6,8 +6,7 @@ import {
   DollarSign, Plus, Edit2, Trash2, Search, Filter, Calendar, CreditCard, 
   Loader2, AlertCircle, CheckCircle2, ArrowUpDown, Layers, RefreshCw, X
 } from 'lucide-react';
-import NotificationBell from '../components/NotificationBell';
-import ThemeToggle from '../components/ThemeToggle';
+import Navbar from '../components/Navbar';
 
 const ExpensesPage = () => {
   const { logout } = useAuth();
@@ -207,128 +206,99 @@ const ExpensesPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      {/* Navbar */}
-      <nav className="bg-slate-900 border-b border-slate-800 px-4 sm:px-6 lg:px-8 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <Link to="/dashboard" className="p-2 bg-gradient-to-tr from-rose-500 to-indigo-600 rounded-xl text-white shadow-md">
-              <DollarSign className="w-5 h-5" />
-            </Link>
-            <h1 className="font-bold text-white text-lg">Expense Management</h1>
-          </div>
-
-          <div className="flex items-center space-x-3 text-xs">
-            <Link to="/dashboard" className="text-slate-300 hover:text-white transition">Dashboard</Link>
-            <Link to="/expenses" className="font-semibold text-rose-400 border-b-2 border-rose-400 pb-1">Expenses</Link>
-            <Link to="/income" className="text-slate-300 hover:text-white transition">Income</Link>
-            <Link to="/categories" className="text-slate-300 hover:text-white transition">Categories</Link>
-            <Link to="/budgets" className="text-slate-300 hover:text-white transition">Budgets</Link>
-            <Link to="/goals" className="text-slate-300 hover:text-white transition">Goals</Link>
-            <Link to="/analytics" className="text-slate-300 hover:text-white transition">Analytics</Link>
-            <Link to="/ai-assistant" className="text-slate-300 hover:text-white transition">AI Assistant</Link>
-            <Link to="/reports" className="text-slate-300 hover:text-white transition">Reports</Link>
-            <Link to="/notifications" className="text-slate-300 hover:text-white transition">Notifications</Link>
-
-            <NotificationBell />
-            <ThemeToggle />
-
-            <Link to="/profile" className="text-slate-300 hover:text-white transition">Profile</Link>
-            <button onClick={logout} className="text-rose-400 hover:text-rose-300 px-3 py-1.5 rounded-xl bg-rose-500/10 border border-rose-500/20 font-medium">Sign Out</button>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+      <Navbar />
 
       {/* Main Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      <main className="max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-4 sm:space-y-6 flex-1">
         
         {/* Success Alert */}
         {successMsg && (
-          <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between text-emerald-300 text-sm">
+          <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between text-emerald-300 text-xs sm:text-sm">
             <div className="flex items-center space-x-2">
-              <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 flex-shrink-0" />
               <span>{successMsg}</span>
             </div>
-            <button onClick={() => setSuccessMsg('')} className="text-xs text-emerald-400 font-bold hover:underline">Dismiss</button>
+            <button onClick={() => setSuccessMsg('')} className="text-xs text-emerald-400 font-bold hover:underline ml-2">Dismiss</button>
           </div>
         )}
 
         {/* API Error Alert */}
         {apiError && (
-          <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center space-x-2 text-rose-300 text-sm">
-            <AlertCircle className="w-5 h-5 text-rose-400" />
+          <div className="p-3.5 sm:p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center space-x-2 text-rose-300 text-xs sm:text-sm">
+            <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-rose-400 flex-shrink-0" />
             <span>{apiError}</span>
           </div>
         )}
 
         {/* Summary Metric Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl flex items-center justify-between">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Filtered Expenses</p>
-              <h3 className="text-2xl font-black text-rose-400 mt-1">₹{summary.total_amount}</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+          <div className="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl shadow-xl flex items-center justify-between">
+            <div className="min-w-0">
+              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400 truncate">Total Filtered Expenses</p>
+              <h3 className="text-xl sm:text-2xl font-black text-rose-400 mt-0.5 truncate">₹{summary.total_amount}</h3>
             </div>
-            <div className="p-3 bg-rose-500/10 text-rose-400 rounded-xl border border-rose-500/20">
-              <DollarSign className="w-6 h-6" />
-            </div>
-          </div>
-
-          <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl flex items-center justify-between">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Expense Records</p>
-              <h3 className="text-2xl font-black text-white mt-1">{summary.count}</h3>
-            </div>
-            <div className="p-3 bg-indigo-500/10 text-indigo-400 rounded-xl border border-indigo-500/20">
-              <Layers className="w-6 h-6" />
+            <div className="p-2.5 sm:p-3 bg-rose-500/10 text-rose-400 rounded-xl border border-rose-500/20 flex-shrink-0 ml-3">
+              <DollarSign className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl flex items-center justify-between">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Average Per Record</p>
-              <h3 className="text-2xl font-black text-sky-400 mt-1">
+          <div className="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl shadow-xl flex items-center justify-between">
+            <div className="min-w-0">
+              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400 truncate">Total Expense Records</p>
+              <h3 className="text-xl sm:text-2xl font-black text-white mt-0.5 truncate">{summary.count}</h3>
+            </div>
+            <div className="p-2.5 sm:p-3 bg-indigo-500/10 text-indigo-400 rounded-xl border border-indigo-500/20 flex-shrink-0 ml-3">
+              <Layers className="w-5 h-5 sm:w-6 sm:h-6" />
+            </div>
+          </div>
+
+          <div className="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl shadow-xl flex items-center justify-between">
+            <div className="min-w-0">
+              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400 truncate">Average Per Record</p>
+              <h3 className="text-xl sm:text-2xl font-black text-sky-400 mt-0.5 truncate">
                 ₹{summary.count > 0 ? (parseFloat(summary.total_amount) / summary.count).toFixed(2) : '0.00'}
               </h3>
             </div>
-            <div className="p-3 bg-sky-500/10 text-sky-400 rounded-xl border border-sky-500/20">
-              <RefreshCw className="w-6 h-6" />
+            <div className="p-2.5 sm:p-3 bg-sky-500/10 text-sky-400 rounded-xl border border-sky-500/20 flex-shrink-0 ml-3">
+              <RefreshCw className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
           </div>
         </div>
 
         {/* Search & Filter Toolbar */}
-        <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-4 shadow-xl">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-            <form onSubmit={handleSearchSubmit} className="relative flex-1">
-              <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-400" />
+        <div className="bg-slate-900 border border-slate-800 p-3.5 sm:p-4 rounded-2xl space-y-3 sm:space-y-4 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
+            <form onSubmit={handleSearchSubmit} className="relative flex-1 w-full">
+              <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search expense description or notes..."
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-rose-500"
+                className="w-full pl-9 pr-3 py-2 sm:py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-rose-500"
               />
             </form>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 w-full sm:w-auto">
               <button
                 onClick={clearFilters}
-                className="px-3 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl border border-slate-700 transition flex items-center"
+                className="flex-1 sm:flex-none justify-center px-3 py-2 sm:py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl border border-slate-700 transition flex items-center"
               >
                 <X className="w-3.5 h-3.5 mr-1" /> Clear
               </button>
               <button
                 onClick={openAddModal}
-                className="px-4 py-2.5 bg-gradient-to-r from-rose-500 to-indigo-600 hover:from-rose-400 hover:to-indigo-500 text-white text-xs font-semibold rounded-xl shadow-lg shadow-rose-500/20 transition flex items-center"
+                className="flex-1 sm:flex-none justify-center px-3.5 py-2 sm:py-2.5 bg-gradient-to-r from-rose-500 to-indigo-600 hover:from-rose-400 hover:to-indigo-500 text-white text-xs font-semibold rounded-xl shadow-lg shadow-rose-500/20 transition flex items-center"
               >
-                <Plus className="w-4 h-4 mr-1.5" /> Record Expense
+                <Plus className="w-4 h-4 mr-1" /> Record Expense
               </button>
             </div>
           </div>
 
           {/* Filter Dropdowns Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 pt-2 border-t border-slate-800/80">
-            <div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3 pt-3 border-t border-slate-800/80">
+            <div className="min-w-0">
               <label className="block text-[10px] font-semibold uppercase text-slate-400 mb-1">Category</label>
               <select
                 value={categoryId}
@@ -342,7 +312,7 @@ const ExpensesPage = () => {
               </select>
             </div>
 
-            <div>
+            <div className="min-w-0">
               <label className="block text-[10px] font-semibold uppercase text-slate-400 mb-1">Payment Method</label>
               <select
                 value={paymentMethod}
@@ -359,7 +329,7 @@ const ExpensesPage = () => {
               </select>
             </div>
 
-            <div>
+            <div className="min-w-0">
               <label className="block text-[10px] font-semibold uppercase text-slate-400 mb-1">From Date</label>
               <input
                 type="date"
@@ -369,7 +339,7 @@ const ExpensesPage = () => {
               />
             </div>
 
-            <div>
+            <div className="min-w-0">
               <label className="block text-[10px] font-semibold uppercase text-slate-400 mb-1">To Date</label>
               <input
                 type="date"
@@ -379,7 +349,7 @@ const ExpensesPage = () => {
               />
             </div>
 
-            <div>
+            <div className="min-w-0">
               <label className="block text-[10px] font-semibold uppercase text-slate-400 mb-1">Min Amount (₹)</label>
               <input
                 type="number"
@@ -391,7 +361,7 @@ const ExpensesPage = () => {
               />
             </div>
 
-            <div>
+            <div className="min-w-0">
               <label className="block text-[10px] font-semibold uppercase text-slate-400 mb-1">Max Amount (₹)</label>
               <input
                 type="number"
@@ -405,17 +375,17 @@ const ExpensesPage = () => {
           </div>
         </div>
 
-        {/* Expenses Data Table */}
+        {/* Expenses Data Table & Mobile Card List */}
         <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
           {loading ? (
-            <div className="flex flex-col items-center justify-center py-20 text-slate-400">
+            <div className="flex flex-col items-center justify-center py-16 text-slate-400">
               <Loader2 className="w-8 h-8 animate-spin text-rose-500 mb-3" />
-              <p className="text-sm font-medium">Fetching expense records from PostgreSQL...</p>
+              <p className="text-xs sm:text-sm font-medium">Fetching expense records from PostgreSQL...</p>
             </div>
           ) : expenses.length === 0 ? (
-            <div className="py-16 px-4 text-center text-slate-400">
-              <DollarSign className="w-12 h-12 mx-auto text-slate-600 mb-3" />
-              <p className="text-base font-semibold text-white">No Expense Records Found</p>
+            <div className="py-12 sm:py-16 px-4 text-center text-slate-400">
+              <DollarSign className="w-10 h-10 sm:w-12 sm:h-12 mx-auto text-slate-600 mb-3" />
+              <p className="text-sm sm:text-base font-semibold text-white">No Expense Records Found</p>
               <p className="text-xs mt-1">Start tracking your spending by adding your first expense record.</p>
               <button
                 onClick={openAddModal}
@@ -425,78 +395,130 @@ const ExpensesPage = () => {
               </button>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-slate-300">
-                <thead className="bg-slate-800/80 text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-800">
-                  <tr>
-                    <th className="py-3.5 px-4 cursor-pointer hover:text-white" onClick={() => toggleSort('expense_date')}>
-                      <div className="flex items-center space-x-1">
-                        <span>Date</span>
-                        <ArrowUpDown className="w-3 h-3" />
+            <>
+              {/* Mobile Card View (< sm screens) */}
+              <div className="block sm:hidden divide-y divide-slate-800/80">
+                {expenses.map((exp) => (
+                  <div key={exp.id} className="p-3.5 space-y-2.5 hover:bg-slate-800/30 transition">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <p className="font-semibold text-white text-sm truncate">{exp.description}</p>
+                        <div className="flex items-center gap-1.5 text-[11px] text-slate-400 mt-0.5">
+                          <span className="font-mono">{exp.expense_date}</span>
+                          <span>&bull;</span>
+                          <span className="px-1.5 py-0.5 rounded text-[10px] uppercase font-bold bg-slate-800 text-slate-300 border border-slate-700">
+                            {exp.payment_method?.replace('_', ' ')}
+                          </span>
+                        </div>
                       </div>
-                    </th>
-                    <th className="py-3.5 px-4">Category</th>
-                    <th className="py-3.5 px-4">Description</th>
-                    <th className="py-3.5 px-4">Payment Method</th>
-                    <th className="py-3.5 px-4 text-right cursor-pointer hover:text-white" onClick={() => toggleSort('amount')}>
-                      <div className="flex items-center justify-end space-x-1">
-                        <span>Amount (₹)</span>
-                        <ArrowUpDown className="w-3 h-3" />
-                      </div>
-                    </th>
-                    <th className="py-3.5 px-4 text-center">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-800/60">
-                  {expenses.map((exp) => (
-                    <tr key={exp.id} className="hover:bg-slate-800/40 transition">
-                      <td className="py-3.5 px-4 font-mono text-slate-300 whitespace-nowrap">{exp.expense_date}</td>
-                      <td className="py-3.5 px-4 whitespace-nowrap">
-                        <span className="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-rose-500/10 text-rose-300 border border-rose-500/20">
+                      <div className="text-right flex-shrink-0">
+                        <span className="font-bold text-rose-400 font-mono text-base block">
+                          - ₹{exp.amount}
+                        </span>
+                        <span className="inline-block mt-0.5 px-2 py-0.5 rounded text-[10px] font-semibold bg-rose-500/10 text-rose-300 border border-rose-500/20">
                           {exp.category?.name || 'Uncategorized'}
                         </span>
-                      </td>
-                      <td className="py-3.5 px-4 font-medium text-white max-w-xs truncate">
-                        {exp.description}
-                        {exp.notes ? <p className="text-[10px] text-slate-500 truncate">{exp.notes}</p> : null}
-                      </td>
-                      <td className="py-3.5 px-4 whitespace-nowrap">
-                        <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-slate-800 text-slate-300 border border-slate-700">
-                          {exp.payment_method?.replace('_', ' ')}
-                        </span>
-                      </td>
-                      <td className="py-3.5 px-4 text-right font-bold text-rose-400 font-mono text-sm whitespace-nowrap">
-                        - ₹{exp.amount}
-                      </td>
-                      <td className="py-3.5 px-4 text-center whitespace-nowrap">
-                        <div className="flex items-center justify-center space-x-2">
-                          <button
-                            onClick={() => openEditModal(exp)}
-                            className="p-1.5 text-slate-400 hover:text-sky-400 hover:bg-slate-800 rounded-lg transition"
-                            title="Edit Expense"
-                          >
-                            <Edit2 className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => setDeletingExpense(exp)}
-                            className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition"
-                            title="Delete Expense"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
+                      </div>
+                    </div>
+
+                    {exp.notes && (
+                      <p className="text-[11px] text-slate-400 bg-slate-800/40 p-2 rounded-lg border border-slate-800 line-clamp-2">
+                        {exp.notes}
+                      </p>
+                    )}
+
+                    <div className="flex items-center justify-end space-x-2 pt-1 border-t border-slate-800/40">
+                      <button
+                        onClick={() => openEditModal(exp)}
+                        className="px-2.5 py-1 text-[11px] font-medium text-sky-400 hover:bg-slate-800 rounded-lg border border-slate-700/60 transition flex items-center gap-1"
+                      >
+                        <Edit2 className="w-3 h-3" /> Edit
+                      </button>
+                      <button
+                        onClick={() => setDeletingExpense(exp)}
+                        className="px-2.5 py-1 text-[11px] font-medium text-rose-400 hover:bg-slate-800 rounded-lg border border-slate-700/60 transition flex items-center gap-1"
+                      >
+                        <Trash2 className="w-3 h-3" /> Delete
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop Table View (>= sm screens) */}
+              <div className="hidden sm:block overflow-x-auto">
+                <table className="w-full text-left text-xs text-slate-300">
+                  <thead className="bg-slate-800/80 text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-800">
+                    <tr>
+                      <th className="py-3.5 px-4 cursor-pointer hover:text-white" onClick={() => toggleSort('expense_date')}>
+                        <div className="flex items-center space-x-1">
+                          <span>Date</span>
+                          <ArrowUpDown className="w-3 h-3" />
                         </div>
-                      </td>
+                      </th>
+                      <th className="py-3.5 px-4">Category</th>
+                      <th className="py-3.5 px-4">Description</th>
+                      <th className="py-3.5 px-4">Payment Method</th>
+                      <th className="py-3.5 px-4 text-right cursor-pointer hover:text-white" onClick={() => toggleSort('amount')}>
+                        <div className="flex items-center justify-end space-x-1">
+                          <span>Amount (₹)</span>
+                          <ArrowUpDown className="w-3 h-3" />
+                        </div>
+                      </th>
+                      <th className="py-3.5 px-4 text-center">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody className="divide-y divide-slate-800/60">
+                    {expenses.map((exp) => (
+                      <tr key={exp.id} className="hover:bg-slate-800/40 transition">
+                        <td className="py-3.5 px-4 font-mono text-slate-300 whitespace-nowrap">{exp.expense_date}</td>
+                        <td className="py-3.5 px-4 whitespace-nowrap">
+                          <span className="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-rose-500/10 text-rose-300 border border-rose-500/20">
+                            {exp.category?.name || 'Uncategorized'}
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4 font-medium text-white max-w-xs truncate">
+                          {exp.description}
+                          {exp.notes ? <p className="text-[10px] text-slate-500 truncate">{exp.notes}</p> : null}
+                        </td>
+                        <td className="py-3.5 px-4 whitespace-nowrap">
+                          <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-slate-800 text-slate-300 border border-slate-700">
+                            {exp.payment_method?.replace('_', ' ')}
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4 text-right font-bold text-rose-400 font-mono text-sm whitespace-nowrap">
+                          - ₹{exp.amount}
+                        </td>
+                        <td className="py-3.5 px-4 text-center whitespace-nowrap">
+                          <div className="flex items-center justify-center space-x-2">
+                            <button
+                              onClick={() => openEditModal(exp)}
+                              className="p-1.5 text-slate-400 hover:text-sky-400 hover:bg-slate-800 rounded-lg transition"
+                              title="Edit Expense"
+                            >
+                              <Edit2 className="w-4 h-4" />
+                            </button>
+                            <button
+                              onClick={() => setDeletingExpense(exp)}
+                              className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition"
+                              title="Delete Expense"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
           )}
 
           {/* Pagination Footer */}
           {pagination.total > 0 && (
-            <div className="bg-slate-900 border-t border-slate-800 px-4 py-3 flex items-center justify-between text-xs text-slate-400">
-              <div>
+            <div className="bg-slate-900 border-t border-slate-800 px-3 sm:px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs text-slate-400">
+              <div className="text-center sm:text-left">
                 Showing <span className="font-semibold text-white">{pagination.from || 0}</span> to <span className="font-semibold text-white">{pagination.to || 0}</span> of <span className="font-semibold text-white">{pagination.total}</span> records
               </div>
 
@@ -504,17 +526,17 @@ const ExpensesPage = () => {
                 <button
                   disabled={page <= 1}
                   onClick={() => setPage(page - 1)}
-                  className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed font-medium transition"
+                  className="px-2.5 sm:px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed font-medium transition"
                 >
                   Previous
                 </button>
-                <span className="px-2 font-mono text-slate-300">
+                <span className="px-1.5 sm:px-2 font-mono text-slate-300">
                   Page {pagination.current_page} of {pagination.last_page}
                 </span>
                 <button
                   disabled={page >= pagination.last_page}
                   onClick={() => setPage(page + 1)}
-                  className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed font-medium transition"
+                  className="px-2.5 sm:px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed font-medium transition"
                 >
                   Next
                 </button>

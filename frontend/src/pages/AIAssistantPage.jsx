@@ -7,6 +7,7 @@ import {
   Loader2, User, CheckCircle2, Shield, Calendar, Layers, Activity, HelpCircle,
   ChevronRight, ArrowRight, CornerDownLeft
 } from 'lucide-react';
+import Navbar from '../components/Navbar';
 
 const STARTER_QUESTIONS = [
   "Summarize my overall financial performance this month.",
@@ -169,42 +170,11 @@ const AIAssistantPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
-      {/* Top Navigation Header */}
-      <header className="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="bg-purple-600/20 p-2 rounded-xl border border-purple-500/30 text-purple-400">
-              <Bot className="w-6 h-6" />
-            </div>
-            <span className="font-bold text-lg text-white tracking-tight">AI Expense SaaS</span>
-            <span className="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-0.5 rounded-full border border-purple-500/20 font-medium">Phase 8 AI Assistant</span>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <Link to="/dashboard" className="text-sm text-slate-300 hover:text-white transition">Dashboard</Link>
-            <Link to="/expenses" className="text-sm text-slate-300 hover:text-white transition">Expenses</Link>
-            <Link to="/income" className="text-sm text-slate-300 hover:text-white transition">Income</Link>
-            <Link to="/categories" className="text-sm text-slate-300 hover:text-white transition">Categories</Link>
-            <Link to="/budgets" className="text-sm text-slate-300 hover:text-white transition">Budgets</Link>
-            <Link to="/goals" className="text-sm text-slate-300 hover:text-white transition">Goals</Link>
-            <Link to="/analytics" className="text-sm text-slate-300 hover:text-white transition">Analytics</Link>
-            <Link to="/ai-assistant" className="text-sm font-semibold text-purple-400 border-b-2 border-purple-400 pb-1 flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5" /> AI Assistant
-            </Link>
-            <Link to="/profile" className="text-sm text-slate-300 hover:text-white transition">Profile</Link>
-            <button
-              onClick={logout}
-              className="text-xs font-medium text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 px-3 py-1.5 rounded-xl transition"
-            >
-              Sign Out
-            </button>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans w-full overflow-x-hidden">
+      <Navbar />
 
       {/* Main Workspace Layout */}
-      <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row gap-6 h-[calc(100vh-5rem)]">
+      <main className="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 flex flex-col md:flex-row gap-4 sm:gap-6 min-h-[calc(100vh-4rem)] md:h-[calc(100vh-4rem)]">
         
         {/* Sidebar: Conversation History */}
         <aside className="w-full md:w-72 bg-slate-900 border border-slate-800 rounded-3xl p-4 flex flex-col shadow-xl flex-shrink-0">

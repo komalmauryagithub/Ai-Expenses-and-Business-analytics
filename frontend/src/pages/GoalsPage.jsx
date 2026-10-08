@@ -7,6 +7,7 @@ import {
   Loader2, AlertCircle, CheckCircle2, RefreshCw, X, History, Clock,
   CheckCircle, AlertTriangle, ArrowRight, PiggyBank
 } from 'lucide-react';
+import Navbar from '../components/Navbar';
 
 const GoalsPage = () => {
   const { logout } = useAuth();
@@ -281,53 +282,26 @@ const GoalsPage = () => {
   const completedCount = goals.filter(g => g.status === 'completed').length;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
-      {/* Top Navigation */}
-      <header className="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="bg-teal-600/20 p-2 rounded-xl border border-teal-500/30 text-teal-400">
-              <Target className="w-6 h-6" />
-            </div>
-            <span className="font-bold text-lg text-white tracking-tight">AI Expense SaaS</span>
-            <span className="text-xs bg-teal-500/10 text-teal-400 px-2 py-0.5 rounded border border-teal-500/20">Financial Goals</span>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <Link to="/dashboard" className="text-sm text-slate-300 hover:text-white transition">Dashboard</Link>
-            <Link to="/expenses" className="text-sm text-slate-300 hover:text-white transition">Expenses</Link>
-            <Link to="/income" className="text-sm text-slate-300 hover:text-white transition">Income</Link>
-            <Link to="/categories" className="text-sm text-slate-300 hover:text-white transition">Categories</Link>
-            <Link to="/budgets" className="text-sm text-slate-300 hover:text-white transition">Budgets</Link>
-            <Link to="/goals" className="text-sm font-semibold text-teal-400 border-b-2 border-teal-400 pb-1">Goals</Link>
-            <Link to="/profile" className="text-sm text-slate-300 hover:text-white transition">Profile</Link>
-            <button
-              onClick={logout}
-              className="text-xs font-medium text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 px-3 py-1.5 rounded-xl transition"
-            >
-              Sign Out
-            </button>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans w-full overflow-x-hidden">
+      <Navbar />
 
       {/* Main Container */}
-      <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      <main className="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-4 sm:space-y-6">
         
         {/* Page Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
-              <Target className="w-7 h-7 text-teal-400" />
-              Financial Goals & Target Planning
+            <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+              <Target className="w-6 h-6 sm:w-7 sm:h-7 text-teal-400 flex-shrink-0" />
+              <span>Financial Goals & Targets</span>
             </h1>
-            <p className="text-sm text-slate-400 mt-1">
+            <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
               Create savings targets, track deposit progress, and manage contribution history.
             </p>
           </div>
           <button
             onClick={openAddGoalModal}
-            className="inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-500 text-white font-medium text-sm px-4 py-2.5 rounded-xl shadow-lg shadow-teal-600/20 transition transform active:scale-95"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-500 text-white font-medium text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg shadow-teal-600/20 transition transform active:scale-95"
           >
             <Plus className="w-4 h-4" />
             Create Goal

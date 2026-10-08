@@ -7,6 +7,7 @@ import {
   Loader2, AlertCircle, CheckCircle2, Wallet, DollarSign, PiggyBank, BarChart3,
   Layers, Shield, ChevronLeft, ChevronRight, Activity, ArrowUpRight, ArrowDownRight
 } from 'lucide-react';
+import Navbar from '../components/Navbar';
 
 const REPORT_TYPES = [
   { id: 'expense', name: 'Expense Report' },
@@ -192,60 +193,30 @@ const ReportsPage = () => {
   const paginatedRows = allRows.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
-      {/* Top Navigation Header */}
-      <header className="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="bg-indigo-600/20 p-2 rounded-xl border border-indigo-500/30 text-indigo-400">
-              <FileText className="w-6 h-6" />
-            </div>
-            <span className="font-bold text-lg text-white tracking-tight">AI Expense SaaS</span>
-            <span className="text-xs bg-indigo-500/10 text-indigo-400 px-2.5 py-0.5 rounded-full border border-indigo-500/20 font-medium">Phase 9 Report Center</span>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <Link to="/dashboard" className="text-sm text-slate-300 hover:text-white transition">Dashboard</Link>
-            <Link to="/expenses" className="text-sm text-slate-300 hover:text-white transition">Expenses</Link>
-            <Link to="/income" className="text-sm text-slate-300 hover:text-white transition">Income</Link>
-            <Link to="/categories" className="text-sm text-slate-300 hover:text-white transition">Categories</Link>
-            <Link to="/budgets" className="text-sm text-slate-300 hover:text-white transition">Budgets</Link>
-            <Link to="/goals" className="text-sm text-slate-300 hover:text-white transition">Goals</Link>
-            <Link to="/analytics" className="text-sm text-slate-300 hover:text-white transition">Analytics</Link>
-            <Link to="/ai-assistant" className="text-sm text-slate-300 hover:text-white transition">AI Assistant</Link>
-            <Link to="/reports" className="text-sm font-semibold text-indigo-400 border-b-2 border-indigo-400 pb-1">Reports</Link>
-            <Link to="/profile" className="text-sm text-slate-300 hover:text-white transition">Profile</Link>
-            <button
-              onClick={logout}
-              className="text-xs font-medium text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 px-3 py-1.5 rounded-xl transition"
-            >
-              Sign Out
-            </button>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans w-full overflow-x-hidden">
+      <Navbar />
 
       {/* Main Content Workspace */}
-      <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      <main className="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-4 sm:space-y-6">
 
         {/* Header Title Card */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-slate-900/80 border border-slate-800 rounded-3xl p-6 shadow-xl">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 sm:gap-4 bg-slate-900/80 border border-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xl">
           <div>
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold mb-2">
+            <div className="inline-flex items-center space-x-2 px-2.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[11px] sm:text-xs font-semibold mb-1.5 sm:mb-2">
               <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
               <span>Production Financial Export Suite</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
-              <FileText className="w-7 h-7 text-indigo-400" />
-              SaaS Report Center & Financial Exports
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
+              <FileText className="w-6 h-6 sm:w-7 sm:h-7 text-indigo-400 flex-shrink-0" />
+              <span>SaaS Report Center & Financial Exports</span>
             </h1>
-            <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            <p className="text-xs sm:text-sm text-slate-400 mt-0.5 sm:mt-1">
               Generate, preview, and download real PostgreSQL financial statements in PDF or formula-injection protected CSV formats.
             </p>
           </div>
 
           {/* Export Actions Bar */}
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
             <button
               onClick={handleDownloadCsv}
               disabled={loading || downloadingCsv}

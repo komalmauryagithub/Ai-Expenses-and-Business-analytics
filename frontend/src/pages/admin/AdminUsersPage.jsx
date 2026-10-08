@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
 import api from '../../api/axios';
-import NotificationBell from '../../components/NotificationBell';
+import Navbar from '../../components/Navbar';
 import {
   Shield, Users, Search, Filter, RefreshCw, AlertCircle, CheckCircle,
   TrendingUp, UserCheck, UserX, ChevronLeft, ChevronRight, ShieldAlert
@@ -106,49 +106,11 @@ const AdminUsersPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
-      {/* Top Navbar */}
-      <nav className="bg-slate-900/90 border-b border-slate-800 sticky top-0 z-30 backdrop-blur">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 bg-gradient-to-tr from-amber-500 to-orange-600 rounded-xl text-white shadow-md shadow-amber-500/20">
-              <Shield className="w-6 h-6" />
-            </div>
-            <div>
-              <h1 className="font-bold text-white text-base sm:text-lg leading-none">Admin Portal</h1>
-              <span className="text-xs text-amber-400 font-mono">User Management</span>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-3 sm:space-x-4">
-            <Link to="/admin/dashboard" className="text-xs text-slate-300 hover:text-white transition">Admin Dashboard</Link>
-            <Link to="/admin/users" className="text-xs font-semibold text-amber-400 border-b-2 border-amber-400 pb-1">Users</Link>
-            <Link to="/admin/audit-logs" className="text-xs text-slate-300 hover:text-white transition">Audit Logs</Link>
-            <Link to="/admin/system-health" className="text-xs text-slate-300 hover:text-white transition">System Health</Link>
-            <Link to="/admin/notifications" className="text-xs text-slate-300 hover:text-white transition">System Alerts</Link>
-
-            <NotificationBell />
-
-            <Link
-              to="/dashboard"
-              className="hidden sm:flex items-center space-x-1.5 text-emerald-400 hover:text-emerald-300 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs font-semibold transition"
-            >
-              <TrendingUp className="w-3.5 h-3.5" />
-              <span>User App</span>
-            </Link>
-
-            <button
-              onClick={logout}
-              className="text-xs font-medium text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 px-3 py-1.5 rounded-xl transition"
-            >
-              Sign Out
-            </button>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans w-full overflow-x-hidden">
+      <Navbar />
 
       {/* Main Container */}
-      <main className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 flex-grow">
+      <main className="max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-4 sm:space-y-6 flex-grow">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-slate-900/60 border border-slate-800 rounded-3xl p-6 shadow-xl">

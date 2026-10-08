@@ -6,6 +6,7 @@ import {
   Tag, Plus, Edit2, Trash2, Shield, Loader2, AlertCircle, CheckCircle2, 
   ArrowLeft, Search, Filter, Lock, Layers 
 } from 'lucide-react';
+import Navbar from '../components/Navbar';
 
 const CategoriesPage = () => {
   const { user, logout, isAdmin } = useAuth();
@@ -133,52 +134,35 @@ const CategoriesPage = () => {
   );
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      {/* Top Navbar */}
-      <nav className="bg-slate-900 border-b border-slate-800 px-4 sm:px-6 lg:px-8 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <Link to="/dashboard" className="p-2 bg-gradient-to-tr from-sky-500 to-indigo-600 rounded-xl text-white shadow-md">
-              <Layers className="w-5 h-5" />
-            </Link>
-            <h1 className="font-bold text-white text-lg">Category Management</h1>
-          </div>
-
-          <div className="flex items-center space-x-3 text-xs">
-            <Link to="/expenses" className="text-slate-300 hover:text-white px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 font-medium">Expenses</Link>
-            <Link to="/income" className="text-slate-300 hover:text-white px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 font-medium">Income</Link>
-            <Link to="/profile" className="text-slate-300 hover:text-white px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 font-medium">Profile</Link>
-            <button onClick={logout} className="text-rose-400 hover:text-rose-300 px-3 py-2 rounded-xl bg-rose-500/10 border border-rose-500/20 font-medium">Sign Out</button>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+      <Navbar />
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      <main className="max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-4 sm:space-y-6 flex-1">
         
         {successMsg && (
-          <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between text-emerald-300 text-sm">
+          <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between text-emerald-300 text-xs sm:text-sm">
             <div className="flex items-center space-x-2">
-              <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 flex-shrink-0" />
               <span>{successMsg}</span>
             </div>
-            <button onClick={() => setSuccessMsg('')} className="text-xs text-emerald-400 font-bold hover:underline">Dismiss</button>
+            <button onClick={() => setSuccessMsg('')} className="text-xs text-emerald-400 font-bold hover:underline ml-2">Dismiss</button>
           </div>
         )}
 
         {apiError && (
-          <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center space-x-2 text-rose-300 text-sm">
-            <AlertCircle className="w-5 h-5 text-rose-400" />
+          <div className="p-3.5 sm:p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center space-x-2 text-rose-300 text-xs sm:text-sm">
+            <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-rose-400 flex-shrink-0" />
             <span>{apiError}</span>
           </div>
         )}
 
         {/* Controls & Tabs */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 p-4 rounded-2xl">
-          <div className="flex space-x-2">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 bg-slate-900 border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
+          <div className="flex space-x-2 w-full sm:w-auto">
             <button
               onClick={() => { setActiveTab('expense'); setType('expense'); }}
-              className={`px-5 py-2.5 rounded-xl text-xs font-semibold transition ${
+              className={`flex-1 sm:flex-none px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs font-semibold transition ${
                 activeTab === 'expense'
                   ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30 shadow'
                   : 'bg-slate-800 text-slate-400 hover:text-slate-200'
@@ -188,7 +172,7 @@ const CategoriesPage = () => {
             </button>
             <button
               onClick={() => { setActiveTab('income'); setType('income'); }}
-              className={`px-5 py-2.5 rounded-xl text-xs font-semibold transition ${
+              className={`flex-1 sm:flex-none px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs font-semibold transition ${
                 activeTab === 'income'
                   ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shadow'
                   : 'bg-slate-800 text-slate-400 hover:text-slate-200'
@@ -198,23 +182,23 @@ const CategoriesPage = () => {
             </button>
           </div>
 
-          <div className="flex items-center space-x-3">
-            <div className="relative">
-              <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-400" />
+          <div className="flex items-center space-x-2 sm:space-x-3 w-full sm:w-auto">
+            <div className="relative flex-1 sm:flex-none">
+              <Search className="w-4 h-4 absolute left-3 top-2.5 sm:top-3 text-slate-400" />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search categories..."
-                className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 w-48 sm:w-64"
+                className="pl-9 pr-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 w-full sm:w-64"
               />
             </div>
 
             <button
               onClick={() => { setName(''); setModalError(''); setShowCreateModal(true); }}
-              className="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-semibold flex items-center shadow transition"
+              className="px-3.5 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-semibold flex items-center shadow transition flex-shrink-0"
             >
-              <Plus className="w-4 h-4 mr-1.5" /> Add Category
+              <Plus className="w-4 h-4 mr-1 sm:mr-1.5" /> Add Category
             </button>
           </div>
         </div>

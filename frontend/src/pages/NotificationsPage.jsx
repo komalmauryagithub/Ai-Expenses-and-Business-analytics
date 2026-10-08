@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 import api from '../api/axios';
-import NotificationBell from '../components/NotificationBell';
+import Navbar from '../components/Navbar';
 import {
   TrendingUp, Bell, Check, CheckCheck, Trash2, Filter, RefreshCw,
   AlertTriangle, Info, AlertCircle, Shield, User, ChevronLeft, ChevronRight, CheckCircle
@@ -132,64 +132,11 @@ const NotificationsPage = () => {
   const notifList = Array.isArray(notifications) ? notifications : [];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
-      {/* Top Navbar */}
-      <nav className="bg-slate-900/90 border-b border-slate-800 sticky top-0 z-30 backdrop-blur">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 bg-gradient-to-tr from-emerald-500 to-teal-600 rounded-xl text-white shadow-md shadow-emerald-500/20">
-              <TrendingUp className="w-6 h-6" />
-            </div>
-            <div>
-              <h1 className="font-bold text-white text-base sm:text-lg leading-none">AI Financial Analytics</h1>
-              <span className="text-xs text-slate-400 font-mono">Notification Center</span>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-3 sm:space-x-4">
-            <Link to="/dashboard" className="text-xs text-slate-300 hover:text-white transition">Dashboard</Link>
-            <Link to="/expenses" className="text-xs text-slate-300 hover:text-white transition">Expenses</Link>
-            <Link to="/income" className="text-xs text-slate-300 hover:text-white transition">Income</Link>
-            <Link to="/categories" className="text-xs text-slate-300 hover:text-white transition">Categories</Link>
-            <Link to="/budgets" className="text-xs text-slate-300 hover:text-white transition">Budgets</Link>
-            <Link to="/goals" className="text-xs text-slate-300 hover:text-white transition">Goals</Link>
-            <Link to="/analytics" className="text-xs text-slate-300 hover:text-white transition">Analytics</Link>
-            <Link to="/ai-assistant" className="text-xs text-slate-300 hover:text-white transition">AI Assistant</Link>
-            <Link to="/reports" className="text-xs text-slate-300 hover:text-white transition">Reports</Link>
-            <Link to="/notifications" className="text-xs font-semibold text-emerald-400 border-b-2 border-emerald-400 pb-1">Notifications</Link>
-
-            <NotificationBell />
-
-            <Link
-              to="/profile"
-              className="hidden sm:flex items-center space-x-1.5 text-slate-300 hover:text-white px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-xs font-medium transition"
-            >
-              <User className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Profile</span>
-            </Link>
-
-            {isAdmin && (
-              <Link
-                to="/admin/dashboard"
-                className="hidden sm:flex items-center space-x-1 text-amber-300 hover:text-amber-200 px-2.5 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs font-semibold transition"
-              >
-                <Shield className="w-3.5 h-3.5 text-amber-400" />
-                <span>Admin</span>
-              </Link>
-            )}
-
-            <button
-              onClick={logout}
-              className="text-xs font-medium text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 px-3 py-1.5 rounded-xl transition"
-            >
-              Sign Out
-            </button>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans w-full overflow-x-hidden">
+      <Navbar />
 
       {/* Main Container */}
-      <main className="max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 flex-grow">
+      <main className="max-w-5xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-4 sm:space-y-6 flex-grow">
         
         {/* Header Bar */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-slate-900/60 border border-slate-800 rounded-3xl p-6 shadow-xl">

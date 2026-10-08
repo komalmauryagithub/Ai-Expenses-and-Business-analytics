@@ -13,8 +13,7 @@ import {
   PieChart, Pie, Cell, AreaChart, Area
 } from 'recharts';
 
-import NotificationBell from '../components/NotificationBell';
-import ThemeToggle from '../components/ThemeToggle';
+import Navbar from '../components/Navbar';
 
 const CHART_COLORS = ['#10B981', '#3B82F6', '#8B5CF6', '#F59E0B', '#EC4899', '#6366F1', '#14B8A6', '#64748B'];
 
@@ -103,83 +102,29 @@ const DashboardPage = () => {
   const isEmptyDashboard = parseFloat(summary.total_income) === 0 && parseFloat(summary.total_expenses) === 0 && recentTransactions.length === 0;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
-      {/* Top Navbar */}
-      <nav className="bg-slate-900/90 border-b border-slate-800 sticky top-0 z-30 backdrop-blur">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 bg-gradient-to-tr from-emerald-500 to-teal-600 rounded-xl text-white shadow-md shadow-emerald-500/20">
-              <TrendingUp className="w-6 h-6" />
-            </div>
-            <div>
-              <h1 className="font-bold text-white text-base sm:text-lg leading-none">AI Financial Analytics</h1>
-              <span className="text-xs text-slate-400">Production SaaS Dashboard</span>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-3 sm:space-x-4">
-            <Link to="/dashboard" className="text-xs font-semibold text-emerald-400 border-b-2 border-emerald-400 pb-1">Dashboard</Link>
-            <Link to="/expenses" className="text-xs text-slate-300 hover:text-white transition">Expenses</Link>
-            <Link to="/income" className="text-xs text-slate-300 hover:text-white transition">Income</Link>
-            <Link to="/categories" className="text-xs text-slate-300 hover:text-white transition">Categories</Link>
-            <Link to="/budgets" className="text-xs text-slate-300 hover:text-white transition">Budgets</Link>
-            <Link to="/goals" className="text-xs text-slate-300 hover:text-white transition">Goals</Link>
-            <Link to="/analytics" className="text-xs text-slate-300 hover:text-white transition">Analytics</Link>
-            <Link to="/ai-assistant" className="text-xs text-slate-300 hover:text-white transition">AI Assistant</Link>
-            <Link to="/reports" className="text-xs text-slate-300 hover:text-white transition">Reports</Link>
-            <Link to="/notifications" className="text-xs text-slate-300 hover:text-white transition">Notifications</Link>
-
-            <NotificationBell />
-            <ThemeToggle />
-
-            <Link
-              to="/profile"
-              className="hidden sm:flex items-center space-x-1.5 text-slate-300 hover:text-white px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-xs font-medium transition"
-            >
-              <User className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Profile</span>
-            </Link>
-
-            {isAdmin && (
-              <Link
-                to="/admin/dashboard"
-                className="hidden sm:flex items-center space-x-1 text-amber-300 hover:text-amber-200 px-2.5 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs font-semibold transition"
-              >
-                <Shield className="w-3.5 h-3.5 text-amber-400" />
-                <span>Admin</span>
-              </Link>
-            )}
-
-            <button
-              onClick={logout}
-              className="text-xs font-medium text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 px-3 py-1.5 rounded-xl transition"
-            >
-              Sign Out
-            </button>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans w-full overflow-x-hidden">
+      <Navbar />
 
       {/* Main Container */}
-      <main className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 flex-grow">
+      <main className="max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-4 sm:space-y-6 flex-grow">
         
         {/* Header & Date Selector */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-slate-900/60 border border-slate-800 rounded-3xl p-6 shadow-xl">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 sm:gap-4 bg-slate-900/60 border border-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xl">
           <div>
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-2">
+            <div className="inline-flex items-center space-x-2 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] sm:text-xs font-semibold mb-1.5 sm:mb-2">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Live Financial Overview</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight">
               Welcome, <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">{user?.name}</span>!
             </h1>
-            <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            <p className="text-xs sm:text-sm text-slate-400 mt-0.5 sm:mt-1">
               {periodInfo.from && periodInfo.to ? `Showing financial figures for ${periodInfo.from} to ${periodInfo.to}` : 'Real-time database aggregated financial metrics.'}
             </p>
           </div>
 
           {/* Period Filter Selector */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
             <div className="flex items-center gap-2 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs">
               <Calendar className="w-4 h-4 text-emerald-400 flex-shrink-0" />
               <select
@@ -248,104 +193,104 @@ const DashboardPage = () => {
         )}
 
         {/* Summary Metric Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
           
           {/* Card 1: Total Income */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg relative overflow-hidden group hover:border-slate-700 transition">
-            <div className="flex items-center justify-between text-slate-400 mb-3">
-              <span className="text-xs font-semibold uppercase tracking-wider">Total Income</span>
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg relative overflow-hidden group hover:border-slate-700 transition">
+            <div className="flex items-center justify-between text-slate-400 mb-2">
+              <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider">Total Income</span>
               <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <TrendingUp className="w-5 h-5" />
+                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
             </div>
             {loading ? (
-              <div className="h-8 bg-slate-800 animate-pulse rounded-lg w-2/3 mb-2" />
+              <div className="h-7 sm:h-8 bg-slate-800 animate-pulse rounded-lg w-2/3 mb-2" />
             ) : (
-              <div className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+              <div className="text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-tight truncate">
                 {formatRupee(summary.total_income)}
               </div>
             )}
-            <div className="mt-3 flex items-center justify-between text-xs">
-              <span className="text-slate-400">{summary.income_count} Transactions</span>
+            <div className="mt-2.5 flex items-center justify-between text-[11px] sm:text-xs">
+              <span className="text-slate-400 truncate">{summary.income_count} Transactions</span>
               {!loading && (
                 <span className={`inline-flex items-center font-medium ${comparison.income_change_percentage >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
                   {comparison.income_change_percentage >= 0 ? <ArrowUpRight className="w-3.5 h-3.5 mr-0.5" /> : <ArrowDownRight className="w-3.5 h-3.5 mr-0.5" />}
-                  {Math.abs(comparison.income_change_percentage)}% vs prev
+                  {Math.abs(comparison.income_change_percentage)}%
                 </span>
               )}
             </div>
           </div>
 
           {/* Card 2: Total Expenses */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg relative overflow-hidden group hover:border-slate-700 transition">
-            <div className="flex items-center justify-between text-slate-400 mb-3">
-              <span className="text-xs font-semibold uppercase tracking-wider">Total Expenses</span>
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg relative overflow-hidden group hover:border-slate-700 transition">
+            <div className="flex items-center justify-between text-slate-400 mb-2">
+              <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider">Total Expenses</span>
               <div className="p-2 rounded-xl bg-rose-500/10 text-rose-400 border border-rose-500/20">
-                <TrendingDown className="w-5 h-5" />
+                <TrendingDown className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
             </div>
             {loading ? (
-              <div className="h-8 bg-slate-800 animate-pulse rounded-lg w-2/3 mb-2" />
+              <div className="h-7 sm:h-8 bg-slate-800 animate-pulse rounded-lg w-2/3 mb-2" />
             ) : (
-              <div className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+              <div className="text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-tight truncate">
                 {formatRupee(summary.total_expenses)}
               </div>
             )}
-            <div className="mt-3 flex items-center justify-between text-xs">
-              <span className="text-slate-400">{summary.expense_count} Transactions</span>
+            <div className="mt-2.5 flex items-center justify-between text-[11px] sm:text-xs">
+              <span className="text-slate-400 truncate">{summary.expense_count} Transactions</span>
               {!loading && (
                 <span className={`inline-flex items-center font-medium ${comparison.expense_change_percentage <= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
                   {comparison.expense_change_percentage <= 0 ? <ArrowDownRight className="w-3.5 h-3.5 mr-0.5" /> : <ArrowUpRight className="w-3.5 h-3.5 mr-0.5" />}
-                  {Math.abs(comparison.expense_change_percentage)}% vs prev
+                  {Math.abs(comparison.expense_change_percentage)}%
                 </span>
               )}
             </div>
           </div>
 
           {/* Card 3: Net Balance */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg relative overflow-hidden group hover:border-slate-700 transition">
-            <div className="flex items-center justify-between text-slate-400 mb-3">
-              <span className="text-xs font-semibold uppercase tracking-wider">Net Balance</span>
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg relative overflow-hidden group hover:border-slate-700 transition">
+            <div className="flex items-center justify-between text-slate-400 mb-2">
+              <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider">Net Balance</span>
               <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
-                <Wallet className="w-5 h-5" />
+                <Wallet className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
             </div>
             {loading ? (
-              <div className="h-8 bg-slate-800 animate-pulse rounded-lg w-2/3 mb-2" />
+              <div className="h-7 sm:h-8 bg-slate-800 animate-pulse rounded-lg w-2/3 mb-2" />
             ) : (
-              <div className={`text-2xl sm:text-3xl font-black tracking-tight ${parseFloat(summary.balance) >= 0 ? 'text-white' : 'text-rose-400'}`}>
+              <div className={`text-xl sm:text-2xl lg:text-3xl font-black tracking-tight truncate ${parseFloat(summary.balance) >= 0 ? 'text-white' : 'text-rose-400'}`}>
                 {formatRupee(summary.balance)}
               </div>
             )}
-            <div className="mt-3 flex items-center justify-between text-xs">
-              <span className="text-slate-400">Income - Expenses</span>
+            <div className="mt-2.5 flex items-center justify-between text-[11px] sm:text-xs">
+              <span className="text-slate-400 truncate">Income - Expenses</span>
               {!loading && (
                 <span className={`inline-flex items-center font-medium ${comparison.balance_change_percentage >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
                   {comparison.balance_change_percentage >= 0 ? <ArrowUpRight className="w-3.5 h-3.5 mr-0.5" /> : <ArrowDownRight className="w-3.5 h-3.5 mr-0.5" />}
-                  {Math.abs(comparison.balance_change_percentage)}% vs prev
+                  {Math.abs(comparison.balance_change_percentage)}%
                 </span>
               )}
             </div>
           </div>
 
           {/* Card 4: Savings Rate */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg relative overflow-hidden group hover:border-slate-700 transition">
-            <div className="flex items-center justify-between text-slate-400 mb-3">
-              <span className="text-xs font-semibold uppercase tracking-wider">Savings Rate</span>
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg relative overflow-hidden group hover:border-slate-700 transition">
+            <div className="flex items-center justify-between text-slate-400 mb-2">
+              <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider">Savings Rate</span>
               <div className="p-2 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
-                <PiggyBank className="w-5 h-5" />
+                <PiggyBank className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
             </div>
             {loading ? (
-              <div className="h-8 bg-slate-800 animate-pulse rounded-lg w-2/3 mb-2" />
+              <div className="h-7 sm:h-8 bg-slate-800 animate-pulse rounded-lg w-2/3 mb-2" />
             ) : (
-              <div className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+              <div className="text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-tight truncate">
                 {summary.savings_rate}%
               </div>
             )}
-            <div className="mt-3 flex items-center justify-between text-xs">
-              <span className="text-slate-400">Savings: {formatRupee(summary.savings)}</span>
-              <span className="text-purple-400 font-semibold">
+            <div className="mt-2.5 flex items-center justify-between text-[11px] sm:text-xs">
+              <span className="text-slate-400 truncate">Savings: {formatRupee(summary.savings)}</span>
+              <span className="text-purple-400 font-semibold truncate ml-1">
                 {summary.savings_rate >= 20 ? 'Optimal' : 'Needs boost'}
               </span>
             </div>

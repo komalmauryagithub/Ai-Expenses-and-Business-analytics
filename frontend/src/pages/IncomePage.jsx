@@ -6,8 +6,7 @@ import {
   TrendingUp, Plus, Edit2, Trash2, Search, Filter, Calendar, DollarSign, 
   Loader2, AlertCircle, CheckCircle2, ArrowUpDown, Layers, RefreshCw, X, Briefcase
 } from 'lucide-react';
-import NotificationBell from '../components/NotificationBell';
-import ThemeToggle from '../components/ThemeToggle';
+import Navbar from '../components/Navbar';
 
 const IncomePage = () => {
   const { logout } = useAuth();
@@ -234,61 +233,26 @@ const IncomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col font-sans">
-      {/* Top Navbar */}
-      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="bg-emerald-600/20 p-2 rounded-lg border border-emerald-500/30 text-emerald-400">
-              <TrendingUp className="w-6 h-6" />
-            </div>
-            <span className="font-bold text-lg text-white tracking-tight">AI Expense SaaS</span>
-            <span className="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/20">Income Management</span>
-          </div>
-
-          <div className="flex items-center space-x-3 text-xs">
-            <Link to="/dashboard" className="text-slate-300 hover:text-white transition">Dashboard</Link>
-            <Link to="/expenses" className="text-slate-300 hover:text-white transition">Expenses</Link>
-            <Link to="/income" className="font-semibold text-emerald-400 border-b-2 border-emerald-400 pb-1">Income</Link>
-            <Link to="/categories" className="text-slate-300 hover:text-white transition">Categories</Link>
-            <Link to="/budgets" className="text-slate-300 hover:text-white transition">Budgets</Link>
-            <Link to="/goals" className="text-slate-300 hover:text-white transition">Goals</Link>
-            <Link to="/analytics" className="text-slate-300 hover:text-white transition">Analytics</Link>
-            <Link to="/ai-assistant" className="text-slate-300 hover:text-white transition">AI Assistant</Link>
-            <Link to="/reports" className="text-slate-300 hover:text-white transition">Reports</Link>
-            <Link to="/notifications" className="text-slate-300 hover:text-white transition">Notifications</Link>
-
-            <NotificationBell />
-            <ThemeToggle />
-
-            <Link to="/profile" className="text-slate-300 hover:text-white transition">Profile</Link>
-            <button
-              onClick={logout}
-              className="font-medium text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 px-3 py-1.5 rounded-lg transition"
-            >
-              Sign Out
-            </button>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+      <Navbar />
 
       {/* Main Container */}
-      <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      <main className="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-4 sm:space-y-6">
         
         {/* Page Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
-              <TrendingUp className="w-7 h-7 text-emerald-400" />
-              Income Management
+            <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+              <TrendingUp className="w-6 h-6 sm:w-7 sm:h-7 text-emerald-400 flex-shrink-0" />
+              <span>Income Management</span>
             </h1>
-            <p className="text-sm text-slate-400 mt-1">
+            <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
               Track, organize, and analyze all income sources with category tags.
             </p>
           </div>
           <button
             onClick={openAddModal}
-            className="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm px-4 py-2.5 rounded-xl shadow-lg shadow-emerald-600/20 transition transform active:scale-95"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg shadow-emerald-600/20 transition transform active:scale-95"
           >
             <Plus className="w-4 h-4" />
             Add Income
@@ -297,58 +261,58 @@ const IncomePage = () => {
 
         {/* Global Notifications */}
         {apiError && (
-          <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-sm flex items-center gap-3">
-            <AlertCircle className="w-5 h-5 flex-shrink-0" />
+          <div className="p-3.5 sm:p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs sm:text-sm flex items-center gap-3">
+            <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
             <span>{apiError}</span>
           </div>
         )}
         {successMsg && (
-          <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-sm flex items-center gap-3">
-            <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+          <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm flex items-center gap-3">
+            <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
             <span>{successMsg}</span>
           </div>
         )}
 
         {/* Metric Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-semibold uppercase tracking-wider">Total Income</span>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-5">
+          <div className="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-4 sm:p-5 shadow-sm">
+            <div className="flex items-center justify-between text-slate-400 mb-1.5">
+              <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider">Total Income</span>
               <DollarSign className="w-4 h-4 text-emerald-400" />
             </div>
-            <div className="text-3xl font-extrabold text-white">
+            <div className="text-2xl sm:text-3xl font-extrabold text-white truncate">
               {formatCurrency(summary.total_amount)}
             </div>
-            <p className="text-xs text-slate-400 mt-1">Sum of filtered entries</p>
+            <p className="text-[11px] sm:text-xs text-slate-400 mt-1">Sum of filtered entries</p>
           </div>
 
-          <div className="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-semibold uppercase tracking-wider">Income Transactions</span>
+          <div className="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-4 sm:p-5 shadow-sm">
+            <div className="flex items-center justify-between text-slate-400 mb-1.5">
+              <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider">Income Transactions</span>
               <Briefcase className="w-4 h-4 text-blue-400" />
             </div>
-            <div className="text-3xl font-extrabold text-white">
+            <div className="text-2xl sm:text-3xl font-extrabold text-white truncate">
               {summary.count}
             </div>
-            <p className="text-xs text-slate-400 mt-1">Total count found</p>
+            <p className="text-[11px] sm:text-xs text-slate-400 mt-1">Total count found</p>
           </div>
 
-          <div className="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-semibold uppercase tracking-wider">Average Income Entry</span>
+          <div className="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-4 sm:p-5 shadow-sm">
+            <div className="flex items-center justify-between text-slate-400 mb-1.5">
+              <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider">Average Income Entry</span>
               <TrendingUp className="w-4 h-4 text-purple-400" />
             </div>
-            <div className="text-3xl font-extrabold text-white">
+            <div className="text-2xl sm:text-3xl font-extrabold text-white truncate">
               {formatCurrency(summary.count > 0 ? (parseFloat(summary.total_amount) / summary.count) : 0)}
             </div>
-            <p className="text-xs text-slate-400 mt-1">Per transaction average</p>
+            <p className="text-[11px] sm:text-xs text-slate-400 mt-1">Per transaction average</p>
           </div>
         </div>
 
         {/* Filter Bar */}
-        <div className="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-5 space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-700/50 pb-3">
-            <div className="flex items-center gap-2 text-sm font-semibold text-slate-200">
+        <div className="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-3.5 sm:p-5 space-y-3 sm:space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-700/50 pb-2.5">
+            <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-200">
               <Filter className="w-4 h-4 text-emerald-400" />
               <span>Search & Filter Income</span>
             </div>
@@ -361,107 +325,111 @@ const IncomePage = () => {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4">
             {/* Search Input */}
-            <form onSubmit={handleSearchSubmit} className="relative sm:col-span-2">
+            <form onSubmit={handleSearchSubmit} className="relative sm:col-span-2 min-w-0">
               <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search source or description..."
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition"
+                className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition"
               />
             </form>
 
             {/* Income Type Filter */}
-            <select
-              value={incomeType}
-              onChange={(e) => { setIncomeType(e.target.value); setPage(1); }}
-              className="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition"
-            >
-              <option value="">All Types</option>
-              <option value="salary">Salary</option>
-              <option value="freelance">Freelance</option>
-              <option value="business">Business</option>
-              <option value="investment">Investment</option>
-              <option value="bonus">Bonus</option>
-              <option value="other">Other</option>
-            </select>
+            <div className="min-w-0">
+              <select
+                value={incomeType}
+                onChange={(e) => { setIncomeType(e.target.value); setPage(1); }}
+                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition"
+              >
+                <option value="">All Types</option>
+                <option value="salary">Salary</option>
+                <option value="freelance">Freelance</option>
+                <option value="business">Business</option>
+                <option value="investment">Investment</option>
+                <option value="bonus">Bonus</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
 
             {/* Category Filter */}
-            <select
-              value={categoryId}
-              onChange={(e) => { setCategoryId(e.target.value); setPage(1); }}
-              className="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition"
-            >
-              <option value="">All Categories</option>
-              {categories.map(c => (
-                <option key={c.id} value={c.id}>{c.name}</option>
-              ))}
-            </select>
+            <div className="min-w-0">
+              <select
+                value={categoryId}
+                onChange={(e) => { setCategoryId(e.target.value); setPage(1); }}
+                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition"
+              >
+                <option value="">All Categories</option>
+                {categories.map(c => (
+                  <option key={c.id} value={c.id}>{c.name}</option>
+                ))}
+              </select>
+            </div>
 
             {/* Date Range From */}
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">From Date</label>
+            <div className="min-w-0">
+              <label className="block text-[10px] sm:text-xs text-slate-400 mb-1">From Date</label>
               <input
                 type="date"
                 value={fromDate}
                 onChange={(e) => { setFromDate(e.target.value); setPage(1); }}
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition"
+                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition"
               />
             </div>
 
             {/* Date Range To */}
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">To Date</label>
+            <div className="min-w-0">
+              <label className="block text-[10px] sm:text-xs text-slate-400 mb-1">To Date</label>
               <input
                 type="date"
                 value={toDate}
                 onChange={(e) => { setToDate(e.target.value); setPage(1); }}
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition"
+                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition"
               />
             </div>
 
             {/* Min Amount */}
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">Min Amount ($)</label>
+            <div className="min-w-0">
+              <label className="block text-[10px] sm:text-xs text-slate-400 mb-1">Min Amount ($)</label>
               <input
                 type="number"
                 step="0.01"
                 placeholder="0.00"
                 value={minAmount}
                 onChange={(e) => { setMinAmount(e.target.value); setPage(1); }}
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition"
+                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition"
               />
             </div>
 
             {/* Max Amount */}
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">Max Amount ($)</label>
+            <div className="min-w-0">
+              <label className="block text-[10px] sm:text-xs text-slate-400 mb-1">Max Amount ($)</label>
               <input
                 type="number"
                 step="0.01"
                 placeholder="10000.00"
                 value={maxAmount}
                 onChange={(e) => { setMaxAmount(e.target.value); setPage(1); }}
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition"
+                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition"
               />
             </div>
           </div>
         </div>
 
-        {/* Data Table Container */}
+        {/* Data Table & Mobile Cards */}
         <div className="bg-slate-800/80 border border-slate-700/60 rounded-2xl overflow-hidden shadow-sm">
           {loading ? (
             <div className="p-12 text-center text-slate-400 flex flex-col items-center justify-center gap-3">
               <Loader2 className="w-8 h-8 animate-spin text-emerald-400" />
-              <p className="text-sm">Loading income records...</p>
+              <p className="text-xs sm:text-sm">Loading income records...</p>
             </div>
           ) : incomeItems.length === 0 ? (
-            <div className="p-12 text-center text-slate-400 space-y-3">
-              <TrendingUp className="w-12 h-12 text-slate-600 mx-auto" />
-              <h3 className="text-base font-semibold text-slate-200">No income records found</h3>
+            <div className="p-10 sm:p-12 text-center text-slate-400 space-y-3">
+              <TrendingUp className="w-10 h-10 sm:w-12 sm:h-12 text-slate-600 mx-auto" />
+              <h3 className="text-sm sm:text-base font-semibold text-slate-200">No income records found</h3>
               <p className="text-xs text-slate-400 max-w-sm mx-auto">
                 No income transactions match your current search and filter criteria. Try clearing filters or create a new income entry.
               </p>
@@ -474,106 +442,160 @@ const IncomePage = () => {
               </button>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm text-slate-300">
-                <thead className="bg-slate-900/80 text-xs font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-700">
-                  <tr>
-                    <th
-                      onClick={() => toggleSort('income_date')}
-                      className="py-3.5 px-4 cursor-pointer hover:text-slate-200 transition"
-                    >
-                      <div className="flex items-center gap-1.5">
-                        <Calendar className="w-3.5 h-3.5" />
-                        <span>Date</span>
-                        <ArrowUpDown className="w-3 h-3" />
+            <>
+              {/* Mobile Card View (< sm) */}
+              <div className="block sm:hidden divide-y divide-slate-700/50">
+                {incomeItems.map((item) => (
+                  <div key={item.id} className="p-3.5 space-y-2 hover:bg-slate-700/20 transition">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <div className="font-semibold text-white text-sm truncate">{item.source}</div>
+                        <div className="flex items-center gap-1.5 text-[11px] text-slate-400 mt-0.5">
+                          <span className="font-mono">{item.income_date}</span>
+                          <span>&bull;</span>
+                          <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium border capitalize ${getTypeBadgeClass(item.type)}`}>
+                            {item.type}
+                          </span>
+                        </div>
                       </div>
-                    </th>
-                    <th className="py-3.5 px-4">Source</th>
-                    <th className="py-3.5 px-4">Type</th>
-                    <th className="py-3.5 px-4">Category</th>
-                    <th
-                      onClick={() => toggleSort('amount')}
-                      className="py-3.5 px-4 cursor-pointer hover:text-slate-200 text-right transition"
-                    >
-                      <div className="flex items-center justify-end gap-1.5">
-                        <DollarSign className="w-3.5 h-3.5" />
-                        <span>Amount</span>
-                        <ArrowUpDown className="w-3 h-3" />
-                      </div>
-                    </th>
-                    <th className="py-3.5 px-4 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-700/50">
-                  {incomeItems.map((item) => (
-                    <tr key={item.id} className="hover:bg-slate-700/30 transition">
-                      <td className="py-3.5 px-4 whitespace-nowrap text-slate-200 font-medium">
-                        {item.income_date}
-                      </td>
-                      <td className="py-3.5 px-4">
-                        <div className="font-semibold text-white">{item.source}</div>
-                        {item.description && (
-                          <div className="text-xs text-slate-400 truncate max-w-xs">{item.description}</div>
-                        )}
-                      </td>
-                      <td className="py-3.5 px-4 whitespace-nowrap">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border capitalize ${getTypeBadgeClass(item.type)}`}>
-                          {item.type}
+                      <div className="text-right flex-shrink-0">
+                        <span className="font-bold text-emerald-400 font-mono text-base block">
+                          +{formatCurrency(item.amount)}
                         </span>
-                      </td>
-                      <td className="py-3.5 px-4 whitespace-nowrap">
-                        {item.category ? (
-                          <span className="text-xs font-medium text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-md border border-emerald-500/20">
+                        {item.category && (
+                          <span className="inline-block mt-0.5 text-[10px] font-medium text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
                             {item.category.name}
                           </span>
-                        ) : (
-                          <span className="text-xs text-slate-500 italic">Uncategorized</span>
                         )}
-                      </td>
-                      <td className="py-3.5 px-4 whitespace-nowrap text-right font-bold text-emerald-400">
-                        +{formatCurrency(item.amount)}
-                      </td>
-                      <td className="py-3.5 px-4 whitespace-nowrap text-right space-x-2">
-                        <button
-                          onClick={() => openEditModal(item)}
-                          className="p-1.5 rounded-lg bg-slate-700/60 hover:bg-slate-700 text-slate-300 hover:text-white transition"
-                          title="Edit Income"
-                        >
-                          <Edit2 className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => setDeletingIncome(item)}
-                          className="p-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 transition"
-                          title="Delete Income"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </td>
+                      </div>
+                    </div>
+
+                    {item.description && (
+                      <p className="text-[11px] text-slate-400 bg-slate-900/40 p-2 rounded-lg border border-slate-800 line-clamp-2">
+                        {item.description}
+                      </p>
+                    )}
+
+                    <div className="flex items-center justify-end space-x-2 pt-1 border-t border-slate-700/40">
+                      <button
+                        onClick={() => openEditModal(item)}
+                        className="px-2.5 py-1 text-[11px] font-medium text-slate-300 hover:bg-slate-700 rounded-lg border border-slate-700 transition flex items-center gap-1"
+                      >
+                        <Edit2 className="w-3 h-3 text-sky-400" /> Edit
+                      </button>
+                      <button
+                        onClick={() => setDeletingIncome(item)}
+                        className="px-2.5 py-1 text-[11px] font-medium text-rose-400 hover:bg-slate-700 rounded-lg border border-slate-700 transition flex items-center gap-1"
+                      >
+                        <Trash2 className="w-3 h-3" /> Delete
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop Table View (>= sm) */}
+              <div className="hidden sm:block overflow-x-auto">
+                <table className="w-full text-left text-sm text-slate-300">
+                  <thead className="bg-slate-900/80 text-xs font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-700">
+                    <tr>
+                      <th
+                        onClick={() => toggleSort('income_date')}
+                        className="py-3.5 px-4 cursor-pointer hover:text-slate-200 transition"
+                      >
+                        <div className="flex items-center gap-1.5">
+                          <Calendar className="w-3.5 h-3.5" />
+                          <span>Date</span>
+                          <ArrowUpDown className="w-3 h-3" />
+                        </div>
+                      </th>
+                      <th className="py-3.5 px-4">Source</th>
+                      <th className="py-3.5 px-4">Type</th>
+                      <th className="py-3.5 px-4">Category</th>
+                      <th
+                        onClick={() => toggleSort('amount')}
+                        className="py-3.5 px-4 cursor-pointer hover:text-slate-200 text-right transition"
+                      >
+                        <div className="flex items-center justify-end gap-1.5">
+                          <DollarSign className="w-3.5 h-3.5" />
+                          <span>Amount</span>
+                          <ArrowUpDown className="w-3 h-3" />
+                        </div>
+                      </th>
+                      <th className="py-3.5 px-4 text-right">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody className="divide-y divide-slate-700/50">
+                    {incomeItems.map((item) => (
+                      <tr key={item.id} className="hover:bg-slate-700/30 transition">
+                        <td className="py-3.5 px-4 whitespace-nowrap text-slate-200 font-medium">
+                          {item.income_date}
+                        </td>
+                        <td className="py-3.5 px-4">
+                          <div className="font-semibold text-white">{item.source}</div>
+                          {item.description && (
+                            <div className="text-xs text-slate-400 truncate max-w-xs">{item.description}</div>
+                          )}
+                        </td>
+                        <td className="py-3.5 px-4 whitespace-nowrap">
+                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border capitalize ${getTypeBadgeClass(item.type)}`}>
+                            {item.type}
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4 whitespace-nowrap">
+                          {item.category ? (
+                            <span className="text-xs font-medium text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-md border border-emerald-500/20">
+                              {item.category.name}
+                            </span>
+                          ) : (
+                            <span className="text-xs text-slate-500 italic">Uncategorized</span>
+                          )}
+                        </td>
+                        <td className="py-3.5 px-4 whitespace-nowrap text-right font-bold text-emerald-400">
+                          +{formatCurrency(item.amount)}
+                        </td>
+                        <td className="py-3.5 px-4 whitespace-nowrap text-right space-x-2">
+                          <button
+                            onClick={() => openEditModal(item)}
+                            className="p-1.5 rounded-lg bg-slate-700/60 hover:bg-slate-700 text-slate-300 hover:text-white transition"
+                            title="Edit Income"
+                          >
+                            <Edit2 className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => setDeletingIncome(item)}
+                            className="p-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 transition"
+                            title="Delete Income"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
           )}
 
           {/* Pagination Controls */}
           {pagination.last_page > 1 && (
-            <div className="bg-slate-900/60 border-t border-slate-700/60 px-4 py-3 flex items-center justify-between">
-              <div className="text-xs text-slate-400">
+            <div className="bg-slate-900/60 border-t border-slate-700/60 px-3 sm:px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2.5">
+              <div className="text-xs text-slate-400 text-center sm:text-left">
                 Showing page <span className="font-semibold text-slate-200">{pagination.current_page}</span> of <span className="font-semibold text-slate-200">{pagination.last_page}</span> ({pagination.total} entries)
               </div>
               <div className="flex items-center space-x-2">
                 <button
                   disabled={page <= 1}
                   onClick={() => setPage(page - 1)}
-                  className="px-3 py-1.5 text-xs rounded-lg border border-slate-700 bg-slate-800 text-slate-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700 transition"
+                  className="px-2.5 sm:px-3 py-1.5 text-xs rounded-lg border border-slate-700 bg-slate-800 text-slate-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700 transition"
                 >
                   Previous
                 </button>
                 <button
                   disabled={page >= pagination.last_page}
                   onClick={() => setPage(page + 1)}
-                  className="px-3 py-1.5 text-xs rounded-lg border border-slate-700 bg-slate-800 text-slate-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700 transition"
+                  className="px-2.5 sm:px-3 py-1.5 text-xs rounded-lg border border-slate-700 bg-slate-800 text-slate-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700 transition"
                 >
                   Next
                 </button>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { User, Mail, Lock, Shield, Key, Loader2, AlertCircle, CheckCircle2, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 const ProfilePage = () => {
   const { user, updateProfile, changePassword } = useAuth();
@@ -85,11 +86,12 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto space-y-8">
-        
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans w-full overflow-x-hidden">
+      <Navbar />
+
+      <main className="flex-grow max-w-4xl w-full mx-auto py-4 sm:py-10 px-3 sm:px-6 lg:px-8 space-y-4 sm:space-y-8">
         {/* Header */}
-        <div className="flex items-center justify-between pb-6 border-b border-slate-800">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
           <div>
             <Link to="/dashboard" className="inline-flex items-center text-xs font-semibold text-sky-400 hover:text-sky-300 transition mb-2">
               <ArrowLeft className="w-4 h-4 mr-1" /> Back to Dashboard
@@ -252,7 +254,7 @@ const ProfilePage = () => {
           </form>
         </div>
 
-      </div>
+      </main>
     </div>
   );
 };
